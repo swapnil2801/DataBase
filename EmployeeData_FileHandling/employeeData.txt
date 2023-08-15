@@ -1,0 +1,2 @@
+Id = 1 : Name = Swapi : Salary = 12322 : City = pune : Age = 20.
+Id = 2 : Name = kiru : Salary = 122 : City = pal : Age = 12.

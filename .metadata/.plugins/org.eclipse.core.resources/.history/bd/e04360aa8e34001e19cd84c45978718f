@@ -1,0 +1,101 @@
+package EmployeeData;
+
+import java.util.*;
+import java.sql.*;
+
+
+public class Employee {
+
+	public static void main(String[] args) throws Exception
+	{
+		System.out.println("Welcome To The Employee Management System Aplication....");
+		
+		String URL = "jdbc:mysql://localhost:3306/EmployeeManagementSystem";
+		String Username = "root";
+		String Pass = "root";
+		
+		Connection cobj= DriverManager.getConnection(URL,Username,Pass);
+		Statement so = cobj.createStatement();
+		
+		int id = 0;
+		
+		while(true)
+		{
+			System.out.println("\n*****Options*****");
+			System.out.println("\nPress 1 to read all data : ");
+			System.out.println("press 2 to enter new record : ");
+			System.out.println("press 3 to edit cureent record(By using primary key");
+			System.out.println("press 4 to delete record : ");
+			System.out.println("Press 5 to exit from application : ");
+
+			
+			Scanner sobj = new Scanner(System.in);
+			int Choice = sobj.nextInt();
+			
+			if(Choice == 5)
+			{
+				System.out.println("Thanks for using Application.");
+				break;
+			}
+			
+			switch(Choice)
+			{
+				case 1:
+					
+					ResultSet ro = so.executeQuery("Select * from employee");
+					
+					if(ro == null)
+					{
+						System.out.println("The database is empty");
+					}
+					
+					while(ro.next())
+					{
+						System.out.println("Id : "+ro.getInt("Id")+" , Name : "+ro.getString("Name")+" , Age : "+ro.getInt("age")+" , Experience(Years) : "+ro.getInt("Experience(Years)"));
+					}
+					break;
+				
+				case 2:					
+					
+					System.out.println("Enter the following data of employee: ");
+					
+					System.out.println("Name : ");
+					int Name = sobj.nextInt();
+					
+					System.out.println("City : ");
+					int City = sobj.nextInt();
+					
+					System.out.println("Age : ");
+					int Age = sobj.nextInt();
+					
+					System.out.println("Experience : ");
+					int Experience = sobj.nextInt();
+					
+					so.executeQuery("insert into employee('Id','Name','City','Age','Experience(Years)') Values("+Name+","+City+","+Age+","+Experience+")");
+					
+					id++;
+					break;
+					
+				case 3:
+					break;
+					
+				case 4:
+					System.out.println("Enter the id number whoes record you want to delete : ");
+					int no = sobj.nextInt();
+					so.executeUpdate("delete from Employee where id = "+no);
+					break;
+					
+				case 5:
+					break;
+					
+				case 6:
+					break;
+					
+				default:
+					System.out.println("Please enter valid choice number...");
+					break;
+			}
+		}
+	}
+
+}

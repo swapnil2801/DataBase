@@ -1,0 +1,19 @@
+package EmployeData;
+
+class Demo
+{
+	public void Display()
+	{
+		System.out.println("Hello demo");
+	}
+}
+
+public class Employee {
+
+	public static void main(String[] args) {
+		Demo dobj = new Demo();
+		dobj.Display();
+
+	}
+
+}
